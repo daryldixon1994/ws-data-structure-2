@@ -1,0 +1,45 @@
+ALGORITHM prblm1-sol2
+VAR
+    sumDistinct, sumOverlap, i , j , count: INTEGER:=0;
+    lg1, lg2 : INTEGER;
+    tabOne : ARRAY_OF INTEGER[lg1];
+    tabTwo : ARRAY_OF INTEGER[lg2];
+    htab : HASH_TABLE<INTEGER,INTEGER>
+BEGIN
+      REPEAT
+        READ(lg1); 
+        READ(lg2);
+    UNTIL ((lg1 <0 || lg2 <0) || (lg1 >20 ||lg2 >20))
+//REMPLIR LES DEUX TABLEAUX
+FOR i FROM 0 TO lg1 STEP 1  DO
+    READ(tabOne[i]);
+END_FOR
+FOR j FROM 0 TO lg2 STEP 1  DO
+    READ(tabTwo[j])
+END_FOR
+
+FOR i FROM 0 TO (lg1-1) STEP 1  DO
+    IF (htab.lookup(tabOne[i])) THEN
+        count := htab.get(tabOne[i]);
+        htab.insert( tabOne[i]  , count + 1  )
+    ELSE
+        htab.insert( tabOne[i] , 1)
+    END_IF
+END_FOR
+
+FOR i FROM 0 TO (lg1-1) STEP 1  DO
+    IF ( htab.get(tabOne[i])===1) THEN
+        sumDistinct :=  sumDistinct + tabOne[i]
+    ELSE
+        sumOverlap := sumOverlap + tabOne[i]
+    END_IF
+END_FOR
+FOR j FROM 0 TO (lg2-1) STEP 1  DO
+    IF ( htab.get(tabTwo[j])===1) THEN
+        sumDistinct :=  sumDistinct + tabTwo[j]
+    ELSE
+        sumOverlap := sumOverlap + tabTwo[j]
+    END_IF
+END_FOR
+    WRITE5("sum of distincts elements :", sumDistinct, "sum of overlap elements : ", sumOverlap)
+END

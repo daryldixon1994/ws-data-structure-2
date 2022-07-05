@@ -1,0 +1,28 @@
+ALGORITHM algorithm_name
+VAR
+    sum, i , j : INTEGER:=0;
+    lg1, lg2 : INTEGER;
+    tabOne : ARRAY_OF INTEGER[lg1];
+    tabTwo : ARRAY_OF INTEGER[lg2];
+BEGIN
+     REPEAT
+        READ(lg1); 
+        READ(lg2);
+    UNTIL ((lg1 <0 || lg2 <0) || (lg1 >20 ||lg2 >20))
+//REMPLIR LES DEUX TABLEAUX
+FOR i FROM 0 TO lg1 STEP 1  DO
+    READ(tabOne[i]);
+END_FOR
+FOR j FROM 0 TO lg2 STEP 1  DO
+    READ(tabTwo[j])
+END_FOR
+WHILE ( i < lg1) DO
+    FOR j FROM 0 TO (lg2-1) STEP 1  DO
+        IF (tabTwo[j] === tabOne[i]) THEN
+            sum :=sum + tabTwo[j]
+        END_IF
+    END_FOR
+    i := i+1
+END_WHILE
+    WRITE("the final sum is :",sum *2 )
+END

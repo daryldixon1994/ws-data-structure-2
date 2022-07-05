@@ -1,0 +1,50 @@
+ALGORITHM checkpoint
+VAR
+    sum, i , j : INTEGER:=0;
+    lg1, lg2 : INTEGER;
+    tabOne : ARRAY_OF INTEGER[lg1];
+    tabTwo : ARRAY_OF INTEGER[lg2];
+BEGIN
+//CONTROLE DE SAISIE
+    REPEAT
+        READ(lg1); 
+        READ(lg2);
+    UNTIL ((lg1 <0 || lg2 <0) || (lg1 >20 ||lg2 >20))
+//REMPLIR LES DEUX TABLEAUX
+FOR i FROM 0 TO lg1 STEP 1  DO
+    READ(tabOne[i]);
+END_FOR
+FOR j FROM 0 TO lg2 STEP 1  DO
+    READ(tabTwo[j])
+END_FOR
+
+WHILE ( j < lg2) DO
+WHILE (i < lg1) DO
+IF (tabTwo[j] <> tabOne[i]) THEN
+    i:= i +1;
+ELSE
+    j:= j+ 1
+    i:=0;
+END_IF
+END_WHILE
+    sum := sum + tabTwo[j]
+    j:=j+1
+    i:=0;
+END_WHILE
+WHILE ( i< lg1) DO
+WHILE (j < lg2) DO
+IF (tabOne[i] <> tabTwo[j]) THEN
+    j:= j +1;
+ELSE
+    i:= i+ 1
+    j:=0;
+END_IF
+END_WHILE
+    sum := sum + tabOne[i]
+    i:=i+1
+    j:=0;
+END_WHILE
+
+    WRITE("sum is:", sum)
+
+END
